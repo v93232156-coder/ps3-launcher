@@ -1,13 +1,14 @@
 name: Build_PS3
 on: [push]
 jobs:
-  build:
+  ps3-build:
     runs-on: ubuntu-latest
+    container: bucanero/ps3dev:latest
     steps:
       - uses: actions/checkout@v4
       - name: Build
         run: |
-          docker run --rm -v $(pwd):/src bucanero/ps3dev make
+          make
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
