@@ -3,16 +3,12 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: bucanero/ps3dev:latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup PS3Dev
-        uses: bucanero/ps3dev-action@v1.1
-
-      - name: Build PKG
+      - name: Build
         run: |
           make
-
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
