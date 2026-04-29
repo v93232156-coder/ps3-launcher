@@ -2,14 +2,23 @@ name: Build_PS3
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/bucanero/ps3dev:latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-dev python3-pip ninja-build build-essential curl
+          curl -sL https://githubusercontent.com | sudo bash /dev/stdin
+
       - name: Build
         run: |
+          export PS3DEV=/usr/local/ps3dev
+          export PSL1GHT=$PS3DEV/psl1ght
+          export PATH=$PATH:$PS3DEV/bin:$PS3DEV/ppu/bin
           make
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
