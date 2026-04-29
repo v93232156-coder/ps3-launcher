@@ -1,4 +1,4 @@
- name: Build_PS3
+name: Build_PS3
 on: [push]
 jobs:
   build:
@@ -13,4 +13,3 @@ jobs:
         with:
           name: My_App_PKG
           path: ./*.pkg
-     
