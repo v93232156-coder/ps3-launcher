@@ -6,20 +6,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Tools
+      - name: Install_Tools
         run: |
           sudo apt-get update
           sudo apt-get install -y wget tar
-          # Качаем инструменты по прямой ссылке
           wget https://github.com
           sudo tar xfz ps3dev-ubuntu-latest.tar.gz -C /
-          # Прописываем пути, чтобы робот всё нашел
           echo "PS3DEV=/usr/local/ps3dev" >> $GITHUB_ENV
           echo "PSL1GHT=/usr/local/ps3dev/psl1ght" >> $GITHUB_ENV
           echo "/usr/local/ps3dev/bin" >> $GITHUB_PATH
           echo "/usr/local/ps3dev/ppu/bin" >> $GITHUB_PATH
 
-      - name: Build PKG
+      - name: Build_PKG
         run: |
           make
 
