@@ -1,0 +1,15 @@
+name: Build_PS3
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+          docker run --rm -v $(pwd):/src bucanero/ps3dev make
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: My_App_PKG
+          path: ./*.pkg
