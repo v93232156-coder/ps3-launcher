@@ -3,20 +3,14 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: ps3dev/ps3dev:latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup PS3 Dev
-        uses: msc-6/setup-ps3dev@v1
-        with:
-          psl1ght-version: 'master'
-
-      - name: Build PKG
+      - name: Build
         run: |
           make
-
-      - name: Upload Artifact
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: My_PS3_App
+          name: My_App_PKG
           path: ./*.pkg
