@@ -5,17 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Install Toolchain
-        run: |
-          # Качаем инструменты для PS3 вручную
-          wget https://github.com
-          sudo tar xfz ps3dev-ubuntu-22.04-latest.tar.gz -C /
-          echo "PS3DEV=/usr/local/ps3dev" >> $GITHUB_ENV
-          echo "PSL1GHT=/usr/local/ps3dev/psl1ght" >> $GITHUB_ENV
-          echo "/usr/local/ps3dev/bin" >> $GITHUB_PATH
-          echo "/usr/local/ps3dev/ppu/bin" >> $GITHUB_PATH
-          echo "/usr/local/ps3dev/spu/bin" >> $GITHUB_PATH
+
+      - name: Setup PS3 Dev
+        uses: msc-6/setup-ps3dev@v1
+        with:
+          psl1ght-version: 'master'
 
       - name: Build PKG
         run: |
