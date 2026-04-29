@@ -13,7 +13,7 @@ jobs:
       - name: Build
         run: |
           export PS3DEV=/usr/local/ps3dev
-          export PSL1GHT=$PS3DEV/psl1ght
+          export PSL1GHT=/usr/local/ps3dev
           export PATH=$PATH:$PS3DEV/bin:$PS3DEV/ppu/bin
           make
       - name: Export
