@@ -3,12 +3,26 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: bucanero/ps3dev:latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build
+
+      - name: Install Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget tar
+          # Качаем инструменты по прямой ссылке
+          wget https://github.com
+          sudo tar xfz ps3dev-ubuntu-latest.tar.gz -C /
+          # Прописываем пути, чтобы робот всё нашел
+          echo "PS3DEV=/usr/local/ps3dev" >> $GITHUB_ENV
+          echo "PSL1GHT=/usr/local/ps3dev/psl1ght" >> $GITHUB_ENV
+          echo "/usr/local/ps3dev/bin" >> $GITHUB_PATH
+          echo "/usr/local/ps3dev/ppu/bin" >> $GITHUB_PATH
+
+      - name: Build PKG
         run: |
           make
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
