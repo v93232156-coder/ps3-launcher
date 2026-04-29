@@ -5,22 +5,18 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup
+      - name: Install
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-dev python3-pip ninja-build build-essential curl git
+          sudo apt-get install -y python3-dev ninja-build build-essential curl git
           curl -sL https://githubusercontent.com | sudo bash /dev/stdin
-          sudo git clone https://github.com /usr/local/ps3dev/psl1ght
-
       - name: Build
         run: |
           export PS3DEV=/usr/local/ps3dev
           export PSL1GHT=$PS3DEV/psl1ght
           export PATH=$PATH:$PS3DEV/bin:$PS3DEV/ppu/bin
           make
-
-      - name: Upload
+      - name: Export
         uses: actions/upload-artifact@v4
         with:
           name: My_App_PKG
