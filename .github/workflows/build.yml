@@ -10,10 +10,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-dev ninja-build build-essential curl git
           curl -sL https://githubusercontent.com | sudo bash /dev/stdin
+          # Принудительно ставим библиотеку psl1ght
+          sudo git clone https://github.com /usr/local/ps3dev/psl1ght
       - name: Build
         run: |
           export PS3DEV=/usr/local/ps3dev
-          export PSL1GHT=/usr/local/ps3dev
           export PATH=$PATH:$PS3DEV/bin:$PS3DEV/ppu/bin
           make
       - name: Export
