@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <psl1ght/lv2.h>
+#include <io/pad.h>
+
+int main() {
+    // Это база, которая говорит консоли: "Читай болванки!"
+    // Мы используем системный вызов номер 8
+    lv2syscall4(8, 0x7032, 0x1, 0, 0); 
+    
+    return 0; 
+}
+
