@@ -3,12 +3,24 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ps3dev/ps3dev:latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build
+
+      - name: Install_Toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget tar
+          wget https://github.com
+          sudo tar xfz ps3dev-ubuntu-22.04-latest.tar.gz -C /
+          echo "PS3DEV=/usr/local/ps3dev" >> $GITHUB_ENV
+          echo "PSL1GHT=/usr/local/ps3dev/psl1ght" >> $GITHUB_ENV
+          echo "/usr/local/ps3dev/bin" >> $GITHUB_PATH
+          echo "/usr/local/ps3dev/ppu/bin" >> $GITHUB_PATH
+
+      - name: Build_PKG
         run: |
           make
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
